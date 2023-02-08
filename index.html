@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./lib/element-ui/lib/theme-chalk/index.css">
     <link rel="stylesheet" href="./lib/codemirror/lib/codemirror.css">
     <link rel="stylesheet" href="./lib/codemirror/theme/lesser-dark.css">
+    <link rel="stylesheet" href="./lib/vue-slider-component/theme/default.css">
 
     <script src="./lib/vue.min.js"></script>
     <script src="./lib/element-ui/lib/index.js"></script>
@@ -17,6 +18,7 @@
     <script type="text/javascript" src="./lib/codemirror/lib/codemirror.min.js"></script>
     <script type="text/javascript" src="./lib/codemirror/mode/javascript/javascript.js"></script>
     <script type="text/javascript" src="./lib/vue-codemirror.js"></script>
+    <script type="text/javascript" src="./lib/vue-slider-component/vue-slider-component.umd.min.js"></script>
     <script type="text/javascript" src="./lib//FileSaver.min.js"></script>
     <link rel="stylesheet" href="./css/sprite.css">
 </head>
@@ -37,7 +39,27 @@
                         <codemirror v-if="iconJson" v-model="iconJson" :options="jsonCmOptions"
                             :style="{ height: '648px',width:'400px' }">
                         </codemirror>
-                        <canvas ref="canvas"></canvas>
+                        <div>
+                            <div v-if="iconJson">
+                                <labe>sprite quality:</labe>
+                                <vue-slider v-model="spriteQuality" :min="0.1" :max="1" :interval="0.1"
+                                    @change="compressSprite"></vue-slider>
+                                <br>
+                            </div>
+                            <div style="display: flex;margin-left:10px;" v-show="iconJson">
+                                <div>
+                                    original image
+                                    <canvas ref="canvas" class="sprite-image"></canvas>
+                                </div>
+                                <div>
+                                    compress image
+                                    <img v-if="iconJson" :src="tempSpriteUrl" class="sprite-image" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
                     </div>
                 </div>
             </el-main>

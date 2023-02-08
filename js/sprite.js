@@ -2,15 +2,20 @@
 // eslint-disable-next-line no-undef
 Vue.use(window.VueCodemirror);
 // eslint-disable-next-line no-undef, no-unused-vars
+const tempCanvas = document.createElement('canvas');
+
 var vm = new Vue({
     el: '#container',
     mixins: [],
     components: {
+        'vueSlider': window['vue-slider-component']
     },
     data: {
         loading: false,
         dialogVisible: false,
+        tempSpriteUrl: '',
         iconJson: '',
+        spriteQuality: 1,
         jsonCmOptions: {
             tabSize: 4,
             styleActiveLine: true,
@@ -73,16 +78,29 @@ var vm = new Vue({
             });
             this.iconJson = JSON.stringify(json, null, 4);
             this.loading = false;
+            this.compressSprite();
+        },
+        compressSprite() {
+            const canvas = this.$refs.canvas;
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            tempCanvas.style.width = canvas.style.width;
+            tempCanvas.style.height = canvas.style.height;
+            const ctx = tempCanvas.getContext('2d');
+            ctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+            ctx.drawImage(canvas, 0, 0);
+            this.tempSpriteUrl = tempCanvas.toDataURL('image/webp', this.spriteQuality);
+            // tempCanvas.toBlob((blob) => {
+            //     this.tempSpriteUrl = URL.createObjectURL(blob);
+            // }, 'image/webp', this.spriteQuality);
         },
         clear() {
             this.iconJson = '';
             const canvas = this.$refs.canvas;
-            // canvas.width = w;
-            // canvas.height = h;
-            // canvas.style.width = `${w}px`;
-            // canvas.style.height = `${h}px`;
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            this.spriteQuality = 1;
+            this.tempSpriteUrl = '';
         },
         download() {
             if (!this.iconJson) {
@@ -94,9 +112,10 @@ var vm = new Vue({
 
             setTimeout(() => {
                 const canvas = this.$refs.canvas;
+                const mType = this.spriteQuality === 1 ? 'png' : 'webp';
                 canvas.toBlob(function (blob) {
-                    window.saveAs(blob, `${fileName}.png`);
-                }, 'image/png', 1);
+                    window.saveAs(blob, `${fileName}.${mType}`);
+                }, `image/${mType}`, this.spriteQuality);
             }, 1000);
         }
 

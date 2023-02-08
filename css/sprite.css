@@ -8,7 +8,7 @@
 }
 .upload-icons {
   /* margin-top: 200px; */
-  width: 600px;
+  width: 400px;
   height: 600px;
   /* margin: auto; */
   border: 2px dashed #d5d5d5;
@@ -22,4 +22,7 @@
 }
 .CodeMirror {
   height: 100%;
+}
+.sprite-image{
+  border:  1px solid gray;
 }
