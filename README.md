@@ -1,1 +1,2 @@
-# sprite-creator
+# sprite creator
+simple sprite create tool online
