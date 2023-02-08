@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" Accept-Encoding="gzip,deflate">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name=renderer content=webkit>
+    <title>Sprite Creator</title>
+    <link rel="stylesheet" href="./lib/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./lib/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="./lib/codemirror/theme/lesser-dark.css">
+
+    <script src="./lib/vue.min.js"></script>
+    <script src="./lib/element-ui/lib/index.js"></script>
+
+    <script src="./lib/coco-message.js"></script>
+    <script src="./lib/FileAPI.min.js"></script>
+    <script src="./lib/potpack.js"></script>
+    <script type="text/javascript" src="./lib/codemirror/lib/codemirror.min.js"></script>
+    <script type="text/javascript" src="./lib/codemirror/mode/javascript/javascript.js"></script>
+    <script type="text/javascript" src="./lib/vue-codemirror.js"></script>
+    <script type="text/javascript" src="./lib//FileSaver.min.js"></script>
+    <link rel="stylesheet" href="./css/sprite.css">
+</head>
+
+<body>
+    <div id="container">
+        <el-container style="height: 100%;">
+            <el-main style="padding: 0px;" class="list-main">
+                <div class="container" style="padding: 10px;" v-loading="loading">
+                    <div class="sprite-tool" v-if="iconJson">
+                        <el-button size="small" @click="download">download sprite</el-button>
+                        <el-button size="small" type="warning" @click="clear">clear</el-button>
+                    </div>
+                    <div class="sprite-content">
+                        <div class="upload-icons" ref="upload-icons">
+                            Drag your icon collection here
+                        </div>
+                        <codemirror v-if="iconJson" v-model="iconJson" :options="jsonCmOptions"
+                            :style="{ height: '648px',width:'400px' }">
+                        </codemirror>
+                        <canvas ref="canvas"></canvas>
+                    </div>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+    <script type="text/javascript" src="./js/sprite.js"></script>
+
+</body>
+
+</html>

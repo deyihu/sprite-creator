@@ -1,0 +1,25 @@
+
+.sprite-tool{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.sprite-content {
+  display: flex;
+}
+.upload-icons {
+  /* margin-top: 200px; */
+  width: 600px;
+  height: 600px;
+  /* margin: auto; */
+  border: 2px dashed #d5d5d5;
+  /* left: 100px; */
+  /* margin-left: -300px; */
+  /* position: absolute; */
+  font-size: 40px;
+  text-align: center;
+  padding: 20px;
+  color: gray;
+}
+.CodeMirror {
+  height: 100%;
+}
