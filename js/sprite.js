@@ -3,7 +3,6 @@
 Vue.use(window.VueCodemirror);
 // eslint-disable-next-line no-undef, no-unused-vars
 const tempCanvas = document.createElement('canvas');
-
 var vm = new Vue({
     el: '#container',
     mixins: [],
