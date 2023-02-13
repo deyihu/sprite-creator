@@ -121,11 +121,15 @@ var vm = new Vue({
     },
     mounted: function () {
         const fdnd = new filednd.FileDND(this.$refs['upload-icons']);
+        const isImage = (file) => {
+            const name = file.name.substring(file.name.lastIndexOf('.') + 1, Infinity);
+            return ['png', 'jpg', 'jpeg', 'svg', 'webp'].includes(name.toLowerCase());
+        }
         fdnd.dnd((files) => {
             const images = [];
             for (let i = 0, len = files.length; i < len; i++) {
                 const type = files[i].type;
-                if (type.indexOf('image/') > -1) {
+                if (type.indexOf('image/') > -1 || isImage(files[i])) {
                     images.push(files[i]);
                 }
             }
