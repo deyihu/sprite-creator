@@ -120,7 +120,8 @@ var vm = new Vue({
 
     },
     mounted: function () {
-        window.FileAPI.event.dnd(this.$refs['upload-icons'], (files) => {
+        const fdnd = new filednd.FileDND(this.$refs['upload-icons']);
+        fdnd.dnd((files) => {
             const images = [];
             for (let i = 0, len = files.length; i < len; i++) {
                 const type = files[i].type;
