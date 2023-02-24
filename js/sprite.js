@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-undef
 Vue.use(window.VueCodemirror);
 // eslint-disable-next-line no-undef, no-unused-vars
-const tempCanvas = document.createElement('canvas');
+// const tempCanvas = document.createElement('canvas');
 var vm = new Vue({
     el: '#container',
     mixins: [],
@@ -81,14 +81,14 @@ var vm = new Vue({
         },
         compressSprite() {
             const canvas = this.$refs.canvas;
-            tempCanvas.width = canvas.width;
-            tempCanvas.height = canvas.height;
-            tempCanvas.style.width = canvas.style.width;
-            tempCanvas.style.height = canvas.style.height;
-            const ctx = tempCanvas.getContext('2d');
-            ctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-            ctx.drawImage(canvas, 0, 0);
-            this.tempSpriteUrl = tempCanvas.toDataURL('image/webp', this.spriteQuality);
+            // tempCanvas.width = canvas.width;
+            // tempCanvas.height = canvas.height;
+            // tempCanvas.style.width = canvas.style.width;
+            // tempCanvas.style.height = canvas.style.height;
+            // const ctx = tempCanvas.getContext('2d');
+            // ctx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+            // ctx.drawImage(canvas, 0, 0);
+            this.tempSpriteUrl = canvas.toDataURL('image/webp', this.spriteQuality);
             // tempCanvas.toBlob((blob) => {
             //     this.tempSpriteUrl = URL.createObjectURL(blob);
             // }, 'image/webp', this.spriteQuality);
@@ -105,8 +105,8 @@ var vm = new Vue({
             if (!this.iconJson) {
                 return this;
             }
-            const blob = new Blob([this.iconJson], { type: 'appliaction/json;charset=utf-8' });
             const fileName = new Date().getTime();
+            const blob = new Blob([this.iconJson], { type: 'appliaction/json;charset=utf-8' });
             window.saveAs(blob, `${fileName}.json`);
 
             setTimeout(() => {
