@@ -1,6 +1,9 @@
 body{
   font-family:'微软雅黑';
 }
+.el-header{
+  text-align: center;
+}
 .sprite-tool {
   text-align: center;
   padding-bottom: 20px;
